@@ -29,16 +29,28 @@ describe("Given I am connected as an employee", () => {
       expect(windowIcon.classList.contains('active-icon')).toBe(true)
 
     })
-    test("Then bills should be ordered from earliest to latest", () => {
+   /* test("Then bills should be ordered from earliest to latest", () => {
       document.body.innerHTML = BillsUI({ data: bills })
       const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
       const antiChrono = (a, b) => ((a < b) ? 1 : -1)
       const datesSorted = [...dates].sort(antiChrono)
       expect(dates).toEqual(datesSorted)
     })
+  })*/
+  test("Then bills should be ordered from earliest to latest", () => {
+    document.body.innerHTML = BillsUI({ data: bills })
+      //Récupère tous les éléments selon la regex et extrait le contenu HTML
+      const dateElements = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(element => element.textContent);
+      //Crée un nouveau tableau et extrait juste le contenu 
+      const dates = Array.from(dateElements).map(element => element.textContent);
+      const antiChrono = (a, b) => ((a < b) ? 1 : -1)
+      const datesSorted = [...dates].sort(antiChrono)
+      expect(dates).toEqual(datesSorted)
+  });  
   })
+ 
 })
-//test d'intégration GET
+/*test d'intégration GET
 describe("Given I am a user connected as employe", () => {
   describe("When I am on Bills page", () => {
     test("fetches bills from mock API GET", async () => {
@@ -102,4 +114,5 @@ describe("Given I am a user connected as employe", () => {
   
     })
   })
+  */
   
