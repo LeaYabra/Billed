@@ -4,7 +4,7 @@
     "testBill": "jest ./src/__tests__/Bills.js"
   },
   "jest": {
-    "verbose": false,
+    "verbose": true,
     "setupFiles": [
       "./setup-jest.js"
     ],
